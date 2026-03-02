@@ -22,7 +22,6 @@ printf(x);
 lexer = Lexer(source_code)
 tokens = lexer.scan()
 
-# initialize the Interpreter
 # initialize the parser with the list of tokens
 parser = Parser(tokens)
 
