@@ -18,6 +18,13 @@ class Lexer:
             self.current_char = self.code[self.position]
         else:
             self.current_char = None  # End of input
+
+    def peek(self):
+        """Look ahead one character without consuming it."""
+        next_pos = self.position + 1
+        if next_pos < len(self.code):
+            return self.code[next_pos]
+        return None
     
     def skip_whitespace(self):
         """Skips whitespace characters."""
@@ -69,10 +76,15 @@ class Lexer:
                 value = self.scan_number()
                 tokens.append(Token('NUMBER', value))
 
-            elif self.current_char in OPERATORS:  # check for operators
-                value = self.current_char
-                tokens.append(Token('OPERATOR', value))
-                self.advance()
+            elif self.current_char in OPERATORS:  # check for operators (single or multi char)
+                two_char_candidate = self.current_char + (self.peek() or '')
+                if two_char_candidate in OPERATORS:
+                    tokens.append(Token('OPERATOR', two_char_candidate))
+                    self.advance()
+                    self.advance()
+                else:
+                    tokens.append(Token('OPERATOR', self.current_char))
+                    self.advance()
 
             elif self.current_char in SYMBOLS:  # check for symbols
                 value = self.current_char
