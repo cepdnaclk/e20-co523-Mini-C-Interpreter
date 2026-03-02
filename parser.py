@@ -71,12 +71,28 @@ class Number(ASTNode):
         return f"Number(value={self.value})"
 
 
+class Boolean(ASTNode):
+    def __init__(self, value):
+        self.value = value
+
+    def __repr__(self):
+        return f"Boolean(value={self.value})"
+
+
 class Block(ASTNode):
     def __init__(self, statements):
         self.statements = statements
 
     def __repr__(self):
         return f"Block(statements={self.statements})"
+
+
+class Printf(ASTNode):
+    def __init__(self, expression):
+        self.expression = expression
+
+    def __repr__(self):
+        return f"Printf(expression={self.expression})"
 
 
 # parser Class
@@ -138,10 +154,21 @@ class Parser:
             return self.parse_if_statement()
         elif self.current_token.type == 'IDENTIFIER':
             return self.parse_assignment()
+        elif self.current_token.type == 'KEYWORD' and self.current_token.value == 'printf':
+            return self.parse_printf()
         elif self.current_token.type == 'SYMBOL' and self.current_token.value == '{':
             return self.parse_block()
         else:
             raise SyntaxError(f"Unexpected statement: {self.current_token}")
+
+    def parse_printf(self):
+        """Parse printf(expression);"""
+        self.advance()  # move past 'printf'
+        self.expect('SYMBOL', '(')
+        expression = self.parse_expression()
+        self.expect('SYMBOL', ')')
+        self.expect('SYMBOL', ';')
+        return Printf(expression)
 
     def parse_if_statement(self):
         """Parse an if-else statement."""
@@ -245,6 +272,10 @@ class Parser:
             value = self.current_token.value
             self.advance()
             return Number(value)
+        elif self.current_token.type == 'KEYWORD' and self.current_token.value in ['true', 'false']:
+            value = True if self.current_token.value == 'true' else False
+            self.advance()
+            return Boolean(value)
         elif self.current_token.type == 'IDENTIFIER':
             name = self.current_token.value
             self.advance()
