@@ -1,7 +1,7 @@
 import re
 from clite_token import Token  # importing the token class
 
-KEYWORDS = {'if', 'else', 'while', 'for', 'def', 'return', 'int', 'float', 'string', 'bool', 'true', 'false', 'and', 'or', 'not', 'printf'}
+KEYWORDS = {'if', 'else', 'while', 'for', 'return', 'int', 'float', 'string', 'bool', 'true', 'false', 'and', 'or', 'not', 'printf'}
 OPERATORS = {'+', '-', '*', '/', '=', '==', '!=', '<', '>', '<=', '>=', '&&', '||', '!'}
 SINGLE_CHAR_OPERATORS = {'+', '-', '*', '/', '=', '<', '>', '!'}
 SYMBOLS = {'(', ')', '{', '}', '[', ']', ';', ','}
