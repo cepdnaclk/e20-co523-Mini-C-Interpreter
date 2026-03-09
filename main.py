@@ -9,14 +9,10 @@ from interpreter import Interpreter
 source_code = """
 int x;
 x = 10;
-if (x > 5) {
-    x = x - 1;
-} else if (x == 5) {
-    x = x + 2;
-} else {
-    x = x + 3;
+
+if (x > 5 && x < 20) {
+    printf(1);
 }
-printf(x);
 """
 # initialize the lexer with source code
 lexer = Lexer(source_code)
