@@ -1,0 +1,27 @@
+{
+  "title": "Mini-C-Interpreter",
+  "team": [
+    {
+      "name": "S.K.P. Methpura",
+      "email": "e20254@eng.pdn.ac.lk",
+      "eNumber": "E/20/254"
+    }
+  ],
+  "supervisors": [
+    {
+      "name": "Mr. Biswajith Dissanayake",
+      "email": "biswajithd@eng.pdn.ac.lk"
+    }
+  ],
+  "tags": [
+    "Python",
+    "compiler",
+    "interpreter",
+    "programming language",
+    "lexical analysis",
+    "syntax analysis",
+    "semantic analysis"
+  ],
+  "image": "cover_page.jpg",
+  "thumbnail": "thumbnail.jpg"
+}
